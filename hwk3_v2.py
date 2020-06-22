@@ -50,6 +50,9 @@ env.seed(seed)
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 
+def choose_action_q_learning(state):
+    action = np.argmax(Q[state, :])
+    return action
 
 def choose_action(state):
     action = 0
@@ -96,12 +99,12 @@ def print_policy2(Q):
 
 for episode in range(n_episodes):
     state = env.reset()
-    action = choose_action(state)
+    action = choose_action_q_learning(state)
 
     while True:  # t < max_steps:
         # env.render()
         state2, reward, done, info = env.step(action)
-        action2 = choose_action(state2)
+        action2 = choose_action_q_learning(state2)
         learn(state, state2, reward, action, action2)
         state = state2
         action = action2
