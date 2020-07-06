@@ -11,12 +11,14 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
 # from keras.activations import relu, linear
+import wandb
 
 import numpy as np
 env = gym.make('LunarLander-v2')
 env.seed(0)
 np.random.seed(0)
 
+wandb.init(name='DQN-64x64-test-3', project="cs76420-rldm-project2")
 
 
 class DQN:
@@ -83,12 +85,13 @@ class DQN:
 
 env = gym.make('LunarLander-v2')
 
-model = tf.keras.models.load_model(r'C:\Users\hyu\Downloads\lunar-lander-DQN-master\trained_model\DQN_Trained.h5')
+model = tf.keras.models.load_model(r'C:\Users\hyu\github-repos\7642Summer2020hyu81\Project_2\lunar-lander-DQN-master\trained_model\DQN_Trained.h5')
+# model = tf.keras.models.load_model(r'C:\Users\hyu\github-repos\7642Summer2020hyu81\Project_2\trained_model\model_50_ep_346')
 
 agent = DQN(env.action_space.n, env.observation_space.shape[0])
 agent.model = model
 
-n_episodes = 2000
+n_episodes = 200
 loss = []
 for e in range(n_episodes):
     state = env.reset()
@@ -109,12 +112,14 @@ for e in range(n_episodes):
             print(f'step {i} , score: {score}')
             # print("episode: {}/{}, score: {}".format(e, episode, score))
             break
+    wandb.log({'Reward':score})
     loss.append(score)
 
     # Average score of last 100 episode
     is_solved = np.mean(loss[-100:])
-    if is_solved > 200:
-        print('\n Task Completed! \n')
-        break
+    wandb.log({'Reward': score,'Average_Reward':is_solved})
+    # if is_solved > 200:
+    #     print('\n Task Completed! \n')
+    #     break
 
     print("Average over last 100 episode: {0:.2f} \n".format(is_solved))

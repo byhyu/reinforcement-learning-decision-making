@@ -4,7 +4,6 @@ physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 import gym
-import tensorflow as tf
 import numpy as np
 import random
 from collections import deque
@@ -21,7 +20,7 @@ class DqnAgent():
     def __init__(self, env):
         self.replay_buffer = deque()
         self.time_step = 0
-        self.gamma = 0.7
+        self.gamma = 0.99
         self.learning_rate = 0.01
         self.epsilon = 0.09
         self.max_epsilon = 0.9
@@ -42,20 +41,15 @@ class DqnAgent():
                      loss='mse')
         self.model = model
 
-
     def one_hot_encode(self, action):
         one_hot_action = np.zeros(self.n_actions)
         one_hot_action[action] = 1
         return one_hot_action
 
     def learn(self, state, action, reward, next_state, done):
-        # one_hot_action = self.one_hot_encode(action)
         self.replay_buffer.append((state, action, reward, next_state, done))
-        if len(self.replay_buffer) > REPLAY_SIZE:
-            self.replay_buffer.popleft()
         if len(self.replay_buffer) > BATCH_SIZE:
             self.train()
-
 
     def train(self):
         self.time_step += 1
