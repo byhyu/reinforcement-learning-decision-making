@@ -1,0 +1,25 @@
+{
+    "root": "C:/Users/hyu/github-repos/OMSCS-RLDM",
+    "program": "C:/Users/hyu/github-repos/OMSCS-RLDM/project_2/ll_v6.py",
+    "git": {
+        "remote": "git@github.com:byhongyu/omscs-rldm.git",
+        "commit": "79f5166945ad9fbea5940fedecae4a39246ae051"
+    },
+    "email": "hongyu.us@gmail.com",
+    "startedAt": "2020-06-30T11:48:11.397918",
+    "host": "redfish",
+    "username": "hyu",
+    "executable": "C:\\Users\\hyu\\AppData\\Local\\Continuum\\anaconda3\\envs\\tensorflow\\python.exe",
+    "os": "Windows-10-10.0.18362-SP0",
+    "python": "3.6.10",
+    "gpu": "Quadro P4000",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "args": [],
+    "state": "running",
+    "jobType": null,
+    "mode": "run",
+    "name": "dqn-32x32-alpha0_01_decay0_99",
+    "project": "cs76420-rldm-project2",
+    "heartbeatAt": "2020-07-01T06:30:54.547987"
+}
