@@ -280,7 +280,7 @@ def exp_common(model_class, exp_name, max_iter=1000000, test_max_iter=10000,
         # pre_q2, post_q2, prev_v2, post_v2, alpha2, epsilon2 = players.step(1, curr_state, next_state, (act2, act1), -reward)
         p1_policy = list(players.get_policy(0, curr_state))
         p2_policy = list(players.get_policy(1, curr_state))
-        stats_player1.append([curr_state, next_state, act1, act2, first, reward, prev_q1, post_q1, prev_v1, post_v1, alpha1, epsilon1] + p1_policy)
+        stats_player1.append([curr_state, next_state, act1, first, reward, prev_q1, post_q1, prev_v1, post_v1, alpha1, epsilon1] + p1_policy)
         stats_player2.append([curr_state, next_state, act1, act2, first, -reward, prev_q2, post_q2, prev_v2, post_v2, alpha2, epsilon2] + p2_policy)
         if curr_state == state_to_monitor:
             q1_diff = abs(post_q1 - prev_q1)
